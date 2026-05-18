@@ -933,6 +933,13 @@ ul { list-style: none; }
 /* ──────────────────────────────────────────────────────────────
    11. OVERLAY MÓVIL
 ────────────────────────────────────────────────────────────── */
+/* ANTES */
+.overlay {
+  display: none;
+  ...
+}
+
+/* DESPUÉS */
 .overlay {
   display: none;
   position: fixed;
@@ -941,10 +948,6 @@ ul { list-style: none; }
   z-index: 150;
   opacity: 0;
   transition: opacity 0.25s;
-}
-
-.overlay--show {
-  opacity: 1;
 }
 
 /* ──────────────────────────────────────────────────────────────
