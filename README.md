@@ -54,15 +54,13 @@ body (flex)
 ## 📱 Capturas de pantalla
 
 ### 🖥️ Escritorio
-![Desktop](evidencias/desktop.png)
+Captura disponible en `/evidencias/evidencias.doc`
 
 ### 📱 Tablet (1024px)
-![Tablet](evidencias/tablet.png)
+Captura disponible en `/evidencias/evidencias.doc`
 
 ### 📱 Móvil (768px)
-![Mobile](evidencias/mobile.png)
-
-> **Cómo tomar las capturas:** Abre `index.html` en Chrome → DevTools (F12) → icono de dispositivo responsive → selecciona el ancho.
+Captura disponible en `/evidencias/evidencias.doc`
 
 ---
 
