@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UserFlow — Panel de Gestión</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Iconos SVG inline, sin dependencias externas -->
+</head>
+
+<body>
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navegación principal">
+
+    <!-- Logo -->
+    <div class="sidebar__brand">
+      <div class="sidebar__logo" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="var(--accent)"/>
+          <circle cx="18" cy="13" r="5" fill="white"/>
+          <path d="M8 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="sidebar__brand-name">UserFlow</span>
+    </div>
+
+    <!-- Toggle mobile -->
+    <button class="sidebar__close" id="sidebarClose" aria-label="Cerrar menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Nav links -->
+    <nav aria-label="Menú lateral">
+      <ul class="sidebar__nav" role="list">
+        <li>
+          <a href="#" class="sidebar__link sidebar__link--active" aria-current="page">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar__link">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Usuarios</span>
+            <span class="sidebar__badge">247</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar__link">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <span>Roles</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar__link">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Permisos</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar__link">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
+            <span>Registros</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar__link">
+            <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M4.93 4.93a10 10 0 0 0 14.14 14.14"/></svg>
+            <span>Configuración</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- User section -->
+    <div class="sidebar__user">
+      <div class="sidebar__avatar" aria-hidden="true">SZ</div>
+      <div class="sidebar__user-info">
+        <span class="sidebar__user-name">Santiago Z.</span>
+        <span class="sidebar__user-role">Administrador</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Overlay móvil -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ===================== WRAPPER PRINCIPAL ===================== -->
+  <div class="dashboard-wrapper">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="header" role="banner">
+      <div class="header__left">
+        <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú lateral" aria-expanded="false" aria-controls="sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="header__search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="search" placeholder="Buscar usuario, rol, email…" aria-label="Buscar en el sistema" />
+        </div>
+      </div>
+      <div class="header__right">
+        <button class="header__icon-btn" aria-label="Notificaciones (3 sin leer)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span class="header__notif-dot" aria-hidden="true"></span>
+        </button>
+        <button class="header__icon-btn" aria-label="Ajustes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M4.93 4.93a10 10 0 0 0 14.14 14.14"/></svg>
+        </button>
+        <div class="header__avatar" aria-label="Perfil de Santiago Z.">SZ</div>
+      </div>
+    </header>
+
+    <!-- ===================== MAIN ===================== -->
+    <main class="main" role="main" id="main-content">
+
+      <!-- Título de página -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-header__title">Gestión de Usuarios</h1>
+          <p class="page-header__subtitle">Administra cuentas, roles y accesos del sistema</p>
+        </div>
+        <button class="btn btn--primary" aria-label="Agregar nuevo usuario">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo Usuario
+        </button>
+      </div>
+
+      <!-- ===== TARJETAS KPI ===== -->
+      <section class="kpi-grid" aria-label="Resumen de métricas">
+
+        <article class="kpi-card kpi-card--blue" tabindex="0">
+          <div class="kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="kpi-card__body">
+            <span class="kpi-card__label">Total Usuarios</span>
+            <span class="kpi-card__value">247</span>
+            <span class="kpi-card__trend kpi-card__trend--up" aria-label="Tendencia: aumento">▲ 12% este mes</span>
+          </div>
+        </article>
+
+        <article class="kpi-card kpi-card--green" tabindex="0">
+          <div class="kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="kpi-card__body">
+            <span class="kpi-card__label">Usuarios Activos</span>
+            <span class="kpi-card__value">189</span>
+            <span class="kpi-card__trend kpi-card__trend--up" aria-label="Tendencia: aumento">▲ 5% esta semana</span>
+          </div>
+        </article>
+
+        <article class="kpi-card kpi-card--orange" tabindex="0">
+          <div class="kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="kpi-card__body">
+            <span class="kpi-card__label">Pendientes</span>
+            <span class="kpi-card__value">34</span>
+            <span class="kpi-card__trend kpi-card__trend--down" aria-label="Tendencia: descenso">▼ 3% vs ayer</span>
+          </div>
+        </article>
+
+        <article class="kpi-card kpi-card--red" tabindex="0">
+          <div class="kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div class="kpi-card__body">
+            <span class="kpi-card__label">Suspendidos</span>
+            <span class="kpi-card__value">24</span>
+            <span class="kpi-card__trend kpi-card__trend--neutral" aria-label="Sin cambio">— Sin cambio</span>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ===== ÁREA MEDIA: GRÁFICO + ROLES ===== -->
+      <section class="mid-grid" aria-label="Gráficos y distribución">
+
+        <!-- Gráfico de barras CSS -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <h2 class="chart-card__title">Nuevos registros (últimas 6 semanas)</h2>
+          </div>
+          <div class="chart" role="img" aria-label="Gráfico de barras: nuevos registros por semana. Semana 1: 18, Semana 2: 32, Semana 3: 27, Semana 4: 45, Semana 5: 38, Semana 6: 52">
+            <div class="chart__bar-group">
+              <div class="chart__bar" style="--h:35%" aria-hidden="true"><span class="chart__tooltip">18</span></div>
+              <span class="chart__label">S1</span>
+            </div>
+            <div class="chart__bar-group">
+              <div class="chart__bar" style="--h:62%" aria-hidden="true"><span class="chart__tooltip">32</span></div>
+              <span class="chart__label">S2</span>
+            </div>
+            <div class="chart__bar-group">
+              <div class="chart__bar" style="--h:52%" aria-hidden="true"><span class="chart__tooltip">27</span></div>
+              <span class="chart__label">S3</span>
+            </div>
+            <div class="chart__bar-group">
+              <div class="chart__bar" style="--h:87%" aria-hidden="true"><span class="chart__tooltip">45</span></div>
+              <span class="chart__label">S4</span>
+            </div>
+            <div class="chart__bar-group">
+              <div class="chart__bar" style="--h:73%" aria-hidden="true"><span class="chart__tooltip">38</span></div>
+              <span class="chart__label">S5</span>
+            </div>
+            <div class="chart__bar-group">
+              <div class="chart__bar chart__bar--highlight" style="--h:100%" aria-hidden="true"><span class="chart__tooltip">52</span></div>
+              <span class="chart__label">S6</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distribución de roles -->
+        <div class="roles-card">
+          <h2 class="chart-card__title">Distribución por rol</h2>
+          <ul class="roles-list" role="list">
+            <li class="roles-list__item">
+              <span class="roles-list__name">Administrador</span>
+              <div class="roles-list__bar-wrap" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" aria-label="Administrador: 5%">
+                <div class="roles-list__bar" style="--w:5%; --c:var(--accent)"></div>
+              </div>
+              <span class="roles-list__count">12</span>
+            </li>
+            <li class="roles-list__item">
+              <span class="roles-list__name">Moderador</span>
+              <div class="roles-list__bar-wrap" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" aria-label="Moderador: 14%">
+                <div class="roles-list__bar" style="--w:14%; --c:#6c63ff"></div>
+              </div>
+              <span class="roles-list__count">35</span>
+            </li>
+            <li class="roles-list__item">
+              <span class="roles-list__name">Editor</span>
+              <div class="roles-list__bar-wrap" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" aria-label="Editor: 28%">
+                <div class="roles-list__bar" style="--w:28%; --c:#22c55e"></div>
+              </div>
+              <span class="roles-list__count">70</span>
+            </li>
+            <li class="roles-list__item">
+              <span class="roles-list__name">Visualizador</span>
+              <div class="roles-list__bar-wrap" role="progressbar" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100" aria-label="Visualizador: 53%">
+                <div class="roles-list__bar" style="--w:53%; --c:#f59e0b"></div>
+              </div>
+              <span class="roles-list__count">130</span>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- ===== TABLA DE USUARIOS ===== -->
+      <section class="table-section" aria-label="Lista de usuarios">
+        <div class="table-section__header">
+          <h2 class="chart-card__title">Usuarios recientes</h2>
+          <div class="table-section__filters">
+            <select aria-label="Filtrar por estado" class="filter-select">
+              <option>Todos</option>
+              <option>Activo</option>
+              <option>Pendiente</option>
+              <option>Suspendido</option>
+            </select>
+            <select aria-label="Filtrar por rol" class="filter-select">
+              <option>Todos los roles</option>
+              <option>Administrador</option>
+              <option>Moderador</option>
+              <option>Editor</option>
+              <option>Visualizador</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" aria-label="Tabla de usuarios del sistema">
+            <thead>
+              <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Registro</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Usuario">
+                  <div class="table__user">
+                    <div class="table__avatar" style="--av-bg:#6c63ff" aria-hidden="true">AC</div>
+                    <span>Ana Castillo</span>
+                  </div>
+                </td>
+                <td data-label="Email">ana.castillo@mail.com</td>
+                <td data-label="Rol"><span class="badge badge--admin">Admin</span></td>
+                <td data-label="Estado"><span class="status status--active">Activo</span></td>
+                <td data-label="Registro">12 May 2025</td>
+                <td data-label="Acciones">
+                  <div class="table__actions">
+                    <button class="action-btn" aria-label="Editar usuario Ana Castillo">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="action-btn action-btn--danger" aria-label="Eliminar usuario Ana Castillo">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Usuario">
+                  <div class="table__user">
+                    <div class="table__avatar" style="--av-bg:#22c55e" aria-hidden="true">LR</div>
+                    <span>Luis Ramírez</span>
+                  </div>
+                </td>
+                <td data-label="Email">l.ramirez@empresa.co</td>
+                <td data-label="Rol"><span class="badge badge--mod">Moderador</span></td>
+                <td data-label="Estado"><span class="status status--active">Activo</span></td>
+                <td data-label="Registro">28 Abr 2025</td>
+                <td data-label="Acciones">
+                  <div class="table__actions">
+                    <button class="action-btn" aria-label="Editar usuario Luis Ramírez">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="action-btn action-btn--danger" aria-label="Eliminar usuario Luis Ramírez">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Usuario">
+                  <div class="table__user">
+                    <div class="table__avatar" style="--av-bg:#f59e0b" aria-hidden="true">MG</div>
+                    <span>María González</span>
+                  </div>
+                </td>
+                <td data-label="Email">mgonzalez@org.net</td>
+                <td data-label="Rol"><span class="badge badge--editor">Editor</span></td>
+                <td data-label="Estado"><span class="status status--pending">Pendiente</span></td>
+                <td data-label="Registro">3 May 2025</td>
+                <td data-label="Acciones">
+                  <div class="table__actions">
+                    <button class="action-btn" aria-label="Editar usuario María González">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="action-btn action-btn--danger" aria-label="Eliminar usuario María González">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Usuario">
+                  <div class="table__user">
+                    <div class="table__avatar" style="--av-bg:#ef4444" aria-hidden="true">JT</div>
+                    <span>Jorge Torres</span>
+                  </div>
+                </td>
+                <td data-label="Email">jtorres@correo.com</td>
+                <td data-label="Rol"><span class="badge badge--viewer">Visualizador</span></td>
+                <td data-label="Estado"><span class="status status--suspended">Suspendido</span></td>
+                <td data-label="Registro">19 Mar 2025</td>
+                <td data-label="Acciones">
+                  <div class="table__actions">
+                    <button class="action-btn" aria-label="Editar usuario Jorge Torres">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="action-btn action-btn--danger" aria-label="Eliminar usuario Jorge Torres">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Usuario">
+                  <div class="table__user">
+                    <div class="table__avatar" style="--av-bg:#06b6d4" aria-hidden="true">SV</div>
+                    <span>Sara Vargas</span>
+                  </div>
+                </td>
+                <td data-label="Email">s.vargas@edu.co</td>
+                <td data-label="Rol"><span class="badge badge--editor">Editor</span></td>
+                <td data-label="Estado"><span class="status status--active">Activo</span></td>
+                <td data-label="Registro">7 May 2025</td>
+                <td data-label="Acciones">
+                  <div class="table__actions">
+                    <button class="action-btn" aria-label="Editar usuario Sara Vargas">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="action-btn action-btn--danger" aria-label="Eliminar usuario Sara Vargas">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginación -->
+        <nav class="pagination" aria-label="Paginación de usuarios">
+          <button class="pagination__btn" aria-label="Página anterior" disabled>&#8592;</button>
+          <button class="pagination__btn pagination__btn--active" aria-current="page" aria-label="Página 1">1</button>
+          <button class="pagination__btn" aria-label="Página 2">2</button>
+          <button class="pagination__btn" aria-label="Página 3">3</button>
+          <span aria-hidden="true">…</span>
+          <button class="pagination__btn" aria-label="Página 24">24</button>
+          <button class="pagination__btn" aria-label="Página siguiente">&#8594;</button>
+        </nav>
+      </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer" role="contentinfo">
+      <span>© 2025 UserFlow — Panel Administrativo</span>
+      <span>v2.4.1 · Universidad Manuela Beltrán</span>
+      <span>Desarrollado con HTML5 + CSS Grid + Flexbox</span>
+    </footer>
+
+  </div><!-- fin .dashboard-wrapper -->
+
+  <script>
+    // ── Toggle sidebar en móvil ──────────────────────────────────────
+    const menuBtn   = document.getElementById('menuBtn');
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('overlay');
+    const closeBtn  = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+      sidebar.classList.add('sidebar--open');
+      overlay.classList.add('overlay--show');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('sidebar--open');
+      overlay.classList.remove('overlay--show');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Cerrar con Escape (accesibilidad teclado)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+
+    // ── Nav links: marcar activo ─────────────────────────────────────
+    document.querySelectorAll('.sidebar__link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.sidebar__link').forEach(l => {
+          l.classList.remove('sidebar__link--active');
+          l.removeAttribute('aria-current');
+        });
+        this.classList.add('sidebar__link--active');
+        this.setAttribute('aria-current', 'page');
+        if (window.innerWidth < 768) closeSidebar();
+      });
+    });
+  </script>
+</body>
+</html>
